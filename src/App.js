@@ -34,8 +34,8 @@ function App() {
 
     const method = editId ? "PUT" : "POST";
     const url = editId
-      ? `http://localhost:5000/projects/${editId}`
-      : "http://localhost:5000/projects";
+      ? `https://portfolio-otyf.onrender.com/projects/${editId}`
+      : "https://portfolio-otyf.onrender.com/projects";
 
     fetch(url, {
       method: method,
@@ -52,7 +52,7 @@ function App() {
   };
 
   const deleteProject = (id) => {
-    fetch(`http://localhost:5000/projects/${id}`, {
+    fetch(`https://portfolio-otyf.onrender.com/projects/${id}`, {
       method: "DELETE"
     })
     .then(() => fetchProjects());
@@ -74,7 +74,6 @@ function App() {
         My Portfolio
       </h1>
 
-      {/* ✅ NEW HEADER TEXT */}
       <p style={{ textAlign: "center", color: "#666" }}>
         A full-stack MERN project to manage and showcase my work
       </p>
@@ -124,7 +123,6 @@ function App() {
 
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
 
-        {/* ✅ EMPTY STATE */}
         {projects.length === 0 && (
           <p style={{ textAlign: "center" }}>No projects added yet</p>
         )}
