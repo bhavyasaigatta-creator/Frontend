@@ -67,118 +67,133 @@ function App() {
     setEditId(project._id);
   };
 
-  return (
-    <div style={{ fontFamily: "Arial", background: "#f5f5f5", minHeight: "100vh", padding: "20px" }}>
-      
-      <h1 style={{ textAlign: "center", color: "#333" }}>
-        My Portfolio
-      </h1>
+ return (
+  <div style={{ fontFamily: "Segoe UI", background: "#eef2f7", minHeight: "100vh", padding: "30px" }}>
+    
+    <h1 style={{ textAlign: "center", color: "#222" }}>
+      🚀 My Portfolio
+    </h1>
 
-      <p style={{ textAlign: "center", color: "#666" }}>
-        A full-stack MERN project to manage and showcase my work
-      </p>
+    <p style={{ textAlign: "center", color: "#555", marginBottom: "30px" }}>
+      A full-stack MERN project to manage and showcase my work
+    </p>
 
-      <div style={{ textAlign: "center", marginBottom: "30px" }}>
-        <form onSubmit={handleSubmit}>
-          <input
-            name="title"
-            placeholder="Project Title"
-            value={form.title}
-            onChange={handleChange}
-            style={{ padding: "10px", margin: "5px", width: "220px" }}
-          />
+    <div style={{
+      maxWidth: "600px",
+      margin: "auto",
+      background: "white",
+      padding: "20px",
+      borderRadius: "12px",
+      boxShadow: "0 5px 15px rgba(0,0,0,0.1)"
+    }}>
+      <form onSubmit={handleSubmit} style={{ textAlign: "center" }}>
+        
+        <input
+          name="title"
+          placeholder="Project Title"
+          value={form.title}
+          onChange={handleChange}
+          style={{ padding: "10px", margin: "8px", width: "80%", borderRadius: "6px", border: "1px solid #ccc" }}
+        />
 
-          <input
-            name="description"
-            placeholder="Description"
-            value={form.description}
-            onChange={handleChange}
-            style={{ padding: "10px", margin: "5px", width: "220px" }}
-          />
+        <input
+          name="description"
+          placeholder="Description"
+          value={form.description}
+          onChange={handleChange}
+          style={{ padding: "10px", margin: "8px", width: "80%", borderRadius: "6px", border: "1px solid #ccc" }}
+        />
 
-          <input
-            name="techStack"
-            placeholder="Tech Stack"
-            value={form.techStack}
-            onChange={handleChange}
-            style={{ padding: "10px", margin: "5px", width: "220px" }}
-          />
+        <input
+          name="techStack"
+          placeholder="Tech Stack"
+          value={form.techStack}
+          onChange={handleChange}
+          style={{ padding: "10px", margin: "8px", width: "80%", borderRadius: "6px", border: "1px solid #ccc" }}
+        />
 
-          <br />
+        <br />
+
+        <button
+          style={{
+            padding: "10px 20px",
+            marginTop: "10px",
+            background: editId ? "#28a745" : "#007bff",
+            color: "white",
+            border: "none",
+            borderRadius: "6px",
+            cursor: "pointer"
+          }}
+        >
+          {editId ? "Update Project" : "Add Project"}
+        </button>
+      </form>
+    </div>
+
+    <div style={{
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      marginTop: "30px"
+    }}>
+
+      {projects.length === 0 && (
+        <p>No projects added yet</p>
+      )}
+
+      {projects.map((p) => (
+        <div
+          key={p._id}
+          style={{
+            background: "white",
+            borderRadius: "12px",
+            margin: "15px",
+            padding: "20px",
+            width: "260px",
+            boxShadow: "0 6px 18px rgba(0,0,0,0.1)",
+            transition: "transform 0.2s ease"
+          }}
+        >
+          <h2 style={{ color: "#007bff" }}>{p.title}</h2>
+          <p style={{ color: "#555" }}>{p.description}</p>
+          <p><b>{p.techStack}</b></p>
 
           <button
+            onClick={() => editProject(p)}
             style={{
-              padding: "10px 20px",
               marginTop: "10px",
-              background: editId ? "green" : "#007bff",
+              marginRight: "10px",
+              padding: "8px 12px",
+              background: "#28a745",
               color: "white",
               border: "none",
-              borderRadius: "5px"
-            }}
-          >
-            {editId ? "Update Project" : "Add Project"}
-          </button>
-        </form>
-      </div>
-
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-
-        {projects.length === 0 && (
-          <p style={{ textAlign: "center" }}>No projects added yet</p>
-        )}
-
-        {projects.map((p) => (
-          <div
-            key={p._id}
-            style={{
-              background: "white",
-              borderRadius: "10px",
-              margin: "15px",
-              padding: "20px",
-              width: "260px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-              transition: "0.3s",
+              borderRadius: "5px",
               cursor: "pointer"
             }}
           >
-            <h2 style={{ color: "#007bff" }}>{p.title}</h2>
-            <p>{p.description}</p>
-            <p><b>{p.techStack}</b></p>
+            Edit
+          </button>
 
-            <button
-              onClick={() => editProject(p)}
-              style={{
-                marginTop: "10px",
-                marginRight: "10px",
-                padding: "8px",
-                background: "green",
-                color: "white",
-                border: "none",
-                borderRadius: "5px"
-              }}
-            >
-              Edit
-            </button>
-
-            <button
-              onClick={() => deleteProject(p._id)}
-              style={{
-                marginTop: "10px",
-                padding: "8px",
-                background: "red",
-                color: "white",
-                border: "none",
-                borderRadius: "5px"
-              }}
-            >
-              Delete
-            </button>
-          </div>
-        ))}
-      </div>
-
+          <button
+            onClick={() => deleteProject(p._id)}
+            style={{
+              marginTop: "10px",
+              padding: "8px 12px",
+              background: "#dc3545",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer"
+            }}
+          >
+            Delete
+          </button>
+        </div>
+      ))}
     </div>
-  );
+
+  </div>
+);
 }
 
 export default App;
